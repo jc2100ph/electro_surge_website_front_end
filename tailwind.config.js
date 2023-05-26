@@ -7,11 +7,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        'mytransparent': 'rgba(31, 31, 31, 0.3)',
+        'myTransparent': 'rgba(31, 31, 31, 0.3)',
+        'myGreen': '#009600',
+        'myBlue': '#5568FF',
+        'myRed': '#F91647'
       },
       width: {
         '90%': '90%',
-      }
+      },
+      fontFamily: {
+        'futura-pt-demi': ['futura pt demi', 'sans-serif']
+      },
+      
     },
   },
   plugins: [require("daisyui")],
