@@ -8,3 +8,6 @@ All notable changes to this project will be documented in this file. See [standa
 ### Features
 
 * create react app using vite with typescript 08a9d24
+- install daisy ui
+- install material ui
+- install tailwind css
