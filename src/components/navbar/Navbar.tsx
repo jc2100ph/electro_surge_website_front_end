@@ -2,7 +2,7 @@
 export default function Navbar(){
     return(
         <>
-            <nav className="bg-myTransparent grid place-items-center h-24">
+            <nav className="absolute z-40 w-full bg-myTransparent grid place-items-center h-24">
                 <div className="flex justify-between w-90%">
                     <div className="flex items-center gap-7">
                         <button className="group">
