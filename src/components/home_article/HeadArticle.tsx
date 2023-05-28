@@ -2,7 +2,7 @@
 export default function HeadArticle(){
     return(
         <>
-            <div className=" mt-40 mb-40">
+            <article className=" mt-40 mb-40">
                 <section className="grid grid-cols-[2fr,1fr] gap-5 w-90% ml-auto mr-auto mb-52">
                     <div className="grid grid-cols-2">
                         <img className="object-cover brightness-75 h-[500px]" src="https://ik.imagekit.io/uddq1v9vn/electro_surge_website/nba.jpg?updatedAt=1685154577890"></img>
@@ -36,7 +36,7 @@ export default function HeadArticle(){
                         <img className=" object-cover h-[500px] brightness-75 w-full" src="https://ik.imagekit.io/uddq1v9vn/electro_surge_website/mlb.jpg?updatedAt=1685154577986"></img>
                     </div>
                 </section>
-            </div>
+            </article>
         </>
     )
 }

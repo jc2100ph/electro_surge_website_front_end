@@ -22,6 +22,12 @@ export default {
         'futura-pt-heavy': ['futura pt heavy', 'sans-serif'],
         'futur-pt-medium': ['futura pt medium', 'sans-serif']
       },
+      backgroundImage: {
+        'hiking': "linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://ik.imagekit.io/uddq1v9vn/electro_surge_website/hiking.jpg?updatedAt=1685241807442')",
+        'forest': "linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://ik.imagekit.io/uddq1v9vn/electro_surge_website/forest.jpg?updatedAt=1685241807277')",
+        'relief': "linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://ik.imagekit.io/uddq1v9vn/electro_surge_website/relief_aid.jpeg?updatedAt=1685241807282')",
+        'beach': "linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://ik.imagekit.io/uddq1v9vn/electro_surge_website/beach.jpg?updatedAt=1685241807465')",
+      },
       
     },
   },
