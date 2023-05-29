@@ -27,7 +27,11 @@ export default {
         'forest': "linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://ik.imagekit.io/uddq1v9vn/electro_surge_website/forest.jpg?updatedAt=1685241807277')",
         'relief': "linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://ik.imagekit.io/uddq1v9vn/electro_surge_website/relief_aid.jpeg?updatedAt=1685241807282')",
         'beach': "linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://ik.imagekit.io/uddq1v9vn/electro_surge_website/beach.jpg?updatedAt=1685241807465')",
+        'court': "linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://ik.imagekit.io/uddq1v9vn/electro_surge_website/basketball-transformed.jpeg?updatedAt=1685320375208')"
       },
+      dropShadow: {
+        'myDropShadow': '9px 6px 4px rgba(0, 0, 0, 0.25)',
+      }
       
     },
   },

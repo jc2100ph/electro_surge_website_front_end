@@ -2,7 +2,7 @@
 export default function GridArticle() {
     return(
         <>
-            <article className="grid grid-cols-[1fr,1.5fr] gap-5 w-90% h-[95vh] ml-auto mr-auto mt-40 mb-40">
+            <article className="grid grid-cols-[1fr,1.5fr] gap-5 w-90% h-[670px] ml-auto mr-auto mt-40 mb-40">
                 <button className="bg-hiking bg-cover bg-center hover:scale-105 ease-in-out duration-200">
                     <p className=" text-white text-[2.5vw] font-futura-pt-heavy tracking-wider ml-auto mr-auto mb-4">
                         Refresh & Conquer: Fuel Your Hiking Adventures with Electro Surge
