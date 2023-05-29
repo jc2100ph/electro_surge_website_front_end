@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://github.com/jc2100ph/electro_surge_website_front_end/compare/v0.0.5...v0.0.6) (2023-05-29)
+
+
+### Features
+
+* add footer component ([a77e1d9](https://github.com/jc2100ph/electro_surge_website_front_end/commit/a77e1d98181e9be34bd4e911c1051ac74ec2b501))
+
 ### [0.0.5](https://github.com/jc2100ph/electro_surge_website_front_end/compare/v0.0.4...v0.0.5) (2023-05-29)
 
 
