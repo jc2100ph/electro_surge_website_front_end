@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/jc2100ph/electro_surge_website_front_end/compare/v0.0.4...v0.0.5) (2023-05-29)
+
+
+### Features
+
+* **home_article:** add product article ([8ab8708](https://github.com/jc2100ph/electro_surge_website_front_end/commit/8ab870823eb01584f5d82b2b5c2f3b91ce904b11))
+
 ### [0.0.4](https://github.com/jc2100ph/electro_surge_website_front_end/compare/v0.0.3...v0.0.4) (2023-05-28)
 
 
