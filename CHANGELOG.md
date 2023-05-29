@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/jc2100ph/electro_surge_website_front_end/compare/v0.0.6...v0.3.0) (2023-05-29)
+
+
+### Features
+
+* add login and register pages ([221aefe](https://github.com/jc2100ph/electro_surge_website_front_end/commit/221aefe29267f97dd2b5e9e32f972cbb8ca81b83))
+
 ### [0.0.6](https://github.com/jc2100ph/electro_surge_website_front_end/compare/v0.0.5...v0.0.6) (2023-05-29)
 
 
