@@ -16,3 +16,8 @@
     font-family: futura pt medium;
     src: url("./fonts/futura/FuturaPTMedium.otf");
 }
+
+@font-face {
+    font-family: futura pt book;
+    src: url("./fonts/futura/FuturaPTBook.otf");
+}

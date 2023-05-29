@@ -20,7 +20,8 @@ export default {
       fontFamily: {
         'futura-pt-demi': ['futura pt demi', 'sans-serif'],
         'futura-pt-heavy': ['futura pt heavy', 'sans-serif'],
-        'futur-pt-medium': ['futura pt medium', 'sans-serif']
+        'futur-pt-medium': ['futura pt medium', 'sans-serif'],
+        'futura-pt-book': ['futura pt book', 'sans-serif']
       },
       backgroundImage: {
         'hiking': "linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://ik.imagekit.io/uddq1v9vn/electro_surge_website/hiking.jpg?updatedAt=1685241807442')",
