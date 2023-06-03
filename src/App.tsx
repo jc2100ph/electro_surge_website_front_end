@@ -5,6 +5,7 @@ import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Products from "./pages/Products"
+import ProductInfo from './pages/ProductInfo';
 
 function App() {
 
@@ -15,9 +16,11 @@ function App() {
         <Route path='/login' element= {<Login />}/>
         <Route path='/register' element= {<Register />}/>
         <Route path='/products' element= {<Products />}/>
+        <Route path='/PH' element= {<ProductInfo />} />
       </Routes>
       <ToastContainer />
     </Router>
+    
   )
 }
 
