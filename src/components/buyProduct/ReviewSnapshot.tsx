@@ -20,8 +20,8 @@ export default function ReviewSnapshot(){
     useEffect(()=>{
         const fetchData = async () => {
             try {
-                const reviewRatingResponse = await axios.get(`${process.env.RENDER_URL}/review/getReviewRatingData/${id}`)
-                const reviewDataResponse = await axios.get(`${process.env.RENDER_URL}/review/getReviewData/${id}?page=${page}`)
+                const reviewRatingResponse = await axios.get(`https://electro-surge-website-back-end.onrender.com/review/getReviewRatingData/${id}`)
+                const reviewDataResponse = await axios.get(`https://electro-surge-website-back-end.onrender.com/review/getReviewData/${id}?page=${page}`)
                 setAverageRating(reviewRatingResponse.data.averageRating)
                 setReviewAmount(reviewRatingResponse.data.reviewAmount)
                 setTotalFiveStarRating(reviewRatingResponse.data.totalFiveStarRating)

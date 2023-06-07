@@ -16,7 +16,7 @@ export default function UserDashboard(){
     useEffect(() => {
         const fetchData =async () => {
             try {
-                const userResponse = await axios.get(`${process.env.RENDER_URL}/user/getUserData`, {
+                const userResponse = await axios.get(`https://electro-surge-website-back-end.onrender.com/user/getUserData`, {
                     withCredentials: true,
                     headers: {
                     'Content-Type': 'application/json'
@@ -47,7 +47,7 @@ export default function UserDashboard(){
                         onClick={async (e) => {
                             try {
                                 e.preventDefault()
-                                const removeFromCart = await axios.post(`${process.env.RENDER_URL}/user/removeFromCart/${userCart._id}`,{
+                                const removeFromCart = await axios.post(`https://electro-surge-website-back-end.onrender.com/user/removeFromCart/${userCart._id}`,{
                                 } ,{ withCredentials: true, 
                                     headers: {'Content-Type': 'application/json'
                                 }})

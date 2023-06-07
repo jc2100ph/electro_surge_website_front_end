@@ -30,7 +30,7 @@ export default function RegisterForm(){
                 return
             }
             
-            const registerResponse = await axios.post(`${process.env.RENDER_URL}/user/register`,{
+            const registerResponse = await axios.post(`https://electro-surge-website-back-end.onrender.com/user/register`,{
                 firstName: firstName,
                 lastName: lastName,
                 email: email,

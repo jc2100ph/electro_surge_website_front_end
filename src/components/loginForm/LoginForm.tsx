@@ -12,7 +12,7 @@ export default function LoginForm(){
     const loginUser = async (e: { preventDefault: () => void; }) =>{
         try {
             e.preventDefault()
-            const loginResponse = await axios.post(`${process.env.RENDER_URL}/user/login`,{
+            const loginResponse = await axios.post(`https://electro-surge-website-back-end.onrender.com/user/login`,{
                 email: email,
                 password: password
             } ,{ withCredentials: true, 

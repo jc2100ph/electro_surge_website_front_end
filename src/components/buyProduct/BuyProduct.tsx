@@ -22,8 +22,8 @@ export default function BuyProduct(){
     useEffect(()=>{
         const fetchData = async () => {
             try {
-                const productResponse = await axios.get(`${process.env.RENDER_URL}/product/getProductData/${id}`)
-                const ReviewRatingResponse = await axios.get(`${process.env.RENDER_URL}/review/getReviewRatingData/${id}`)
+                const productResponse = await axios.get(`https://electro-surge-website-back-end.onrender.com/product/getProductData/${id}`)
+                const ReviewRatingResponse = await axios.get(`https://electro-surge-website-back-end.onrender.com/review/getReviewRatingData/${id}`)
                 setData(productResponse.data)
                 setTitle(productResponse.data.name)
                 setDescription(productResponse.data.description)
@@ -75,7 +75,7 @@ export default function BuyProduct(){
     const addToCart = async (e: { preventDefault: () => void; }) => {
         try {
             e.preventDefault()
-            const responseAddToCart = await axios.post(`${process.env.RENDER_URL}/user/addToCart`,{
+            const responseAddToCart = await axios.post(`https://electro-surge-website-back-end.onrender.com/user/addToCart`,{
                 orderProductId: id,
                 orderName: title,
                 orderColor: flavor,

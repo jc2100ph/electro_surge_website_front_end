@@ -24,7 +24,7 @@ export default function UserCheckOut(){
     useEffect(() => {
         const fetchData =async () => {
             try {
-                const userResponse = await axios.get(`${process.env.RENDER_URL}/user/getUserData`, {
+                const userResponse = await axios.get(`https://electro-surge-website-back-end.onrender.com/user/getUserData`, {
                     withCredentials: true,
                     headers: {
                     'Content-Type': 'application/json'
@@ -57,7 +57,7 @@ export default function UserCheckOut(){
 
     const checkOut = async () => {
         try {
-            const createOrderResponse = await axios.post(`${process.env.RENDER_URL}/order/createOrder`,{
+            const createOrderResponse = await axios.post(`https://electro-surge-website-back-end.onrender.com/order/createOrder`,{
                 itemQuantity: 0,
                 totalPrice: data.CartTotalPrice,
                 address: completeAddress
