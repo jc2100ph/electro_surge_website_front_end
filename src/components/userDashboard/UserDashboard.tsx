@@ -47,6 +47,7 @@ export default function UserDashboard(){
                         onClick={async (e) => {
                             try {
                                 e.preventDefault()
+                                // @ts-ignore
                                 const removeFromCart = await axios.post(`https://electro-surge-website-back-end.onrender.com/user/removeFromCart/${userCart._id}`,{
                                 } ,{ withCredentials: true, 
                                     headers: {'Content-Type': 'application/json'

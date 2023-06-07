@@ -30,6 +30,7 @@ export default function Navbar(){
     const userLogout = async (e: { preventDefault: () => void; }) => {
         try {
             e.preventDefault()
+            // @ts-ignore
             const logOutResponse = await axios.post(`https://electro-surge-website-back-end.onrender.com/user/logout`,{
             } ,{ withCredentials: true, 
                 headers: {'Content-Type': 'application/json'

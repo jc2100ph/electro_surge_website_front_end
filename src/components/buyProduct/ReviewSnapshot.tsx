@@ -79,6 +79,7 @@ export default function ReviewSnapshot(){
             </>
         )
     })
+    
 
     return(
         <>
@@ -86,7 +87,8 @@ export default function ReviewSnapshot(){
                 <section className="flex gap-10 mb-5">
                     <h1 className=" font-futura-pt-heavy text-4xl tracking-wider">Review Snapshot</h1>
                     <button className="btn !border-solid border-2 border-secondary p-2 w-[300px] font-futura-pt-heavy text-xl tracking-wider 
-                    rounded-none hover:bg-secondary hover:text-white !ease-out !duration-200" onClick={()=>window.my_modal_1.showModal()}>
+                    rounded-none hover:bg-secondary hover:text-white !ease-out !duration-200" onClick={()=>(window as any).my_modal_1.showModal()
+                    }>
                         Write A Button
                     </button>
                     <dialog id="my_modal_1" className="modal">

@@ -57,6 +57,7 @@ export default function UserCheckOut(){
 
     const checkOut = async () => {
         try {
+            // @ts-ignore
             const createOrderResponse = await axios.post(`https://electro-surge-website-back-end.onrender.com/order/createOrder`,{
                 itemQuantity: 0,
                 totalPrice: data.CartTotalPrice,
