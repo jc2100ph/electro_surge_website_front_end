@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/jc2100ph/electro_surge_website_front_end/compare/v0.3.0...v1.0.0) (2023-06-07)
+
+
+### Features
+
+* add all product component and product page ([9417e19](https://github.com/jc2100ph/electro_surge_website_front_end/commit/9417e19a89c1f078c5f352b8e5437a0a87d2e129))
+* **productInfo:** add buyproduct page ([30fe648](https://github.com/jc2100ph/electro_surge_website_front_end/commit/30fe648c859fdfd087fad0440b57f9e465bb6f5d))
+
+
+### Bug Fixes
+
+* ignore typescript errors for vercel launch ([0faa898](https://github.com/jc2100ph/electro_surge_website_front_end/commit/0faa8986ae35ae3bcebc2e12142dfd0871ebdb34))
+
 ## [0.3.0](https://github.com/jc2100ph/electro_surge_website_front_end/compare/v0.0.6...v0.3.0) (2023-05-29)
 
 
