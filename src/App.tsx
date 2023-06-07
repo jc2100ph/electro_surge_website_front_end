@@ -6,6 +6,8 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Products from "./pages/Products"
 import ProductInfo from './pages/ProductInfo';
+import Dashboard from './pages/Dashboard'; 
+import CheckOut from "./pages/CheckOut"
 
 function App() {
 
@@ -16,7 +18,9 @@ function App() {
         <Route path='/login' element= {<Login />}/>
         <Route path='/register' element= {<Register />}/>
         <Route path='/products' element= {<Products />}/>
-        <Route path='/PH' element= {<ProductInfo />} />
+        <Route path='/buy/:id' element= {<ProductInfo />} />
+        <Route path='/dashboard/:id' element={<Dashboard />} />
+        <Route path='/checkout/:id' element={<CheckOut />} />
       </Routes>
       <ToastContainer />
     </Router>

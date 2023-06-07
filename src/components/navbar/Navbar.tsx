@@ -1,6 +1,48 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar(){
+    const navigate = useNavigate()
+    const [noToken, setNoToken] = useState(true)
+    const [userId, setUserId] = useState("")
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const userResponse = await axios.get(`${process.env.RENDER_URL}/user/getUserData`, {
+                    withCredentials: true,
+                    headers: {
+                    'Content-Type': 'application/json'
+                    }
+                })
+                if(userResponse.data == "no token"){
+                    setNoToken(false)
+                }
+                setUserId(userResponse.data.userData._id)
+            } catch (error) {
+            console.error(error);
+            }
+        };
+        fetchData()
+    }, []);
+
+    const userLogout = async (e: { preventDefault: () => void; }) => {
+        try {
+            e.preventDefault()
+            const logOutResponse = await axios.post(`${process.env.RENDER_URL}/user/logout`,{
+            } ,{ withCredentials: true, 
+                headers: {'Content-Type': 'application/json'
+            }}
+            )
+            navigate("/")
+            window.location.reload()
+        } catch (error) {
+            console.error(error);
+        }
+    }
+                
+
     return(
         <>
             <nav className="absolute z-40 w-full bg-myTransparent grid place-items-center h-24">
@@ -14,10 +56,12 @@ export default function Navbar(){
                             </button>
                         </Link>
                         <div className="font-futura-pt-demi text-white">
-                            <button className="mr-7 tracking-widest
-                            hover:text-myRed hover:underline underline-offset-8 hover:text-xl ease-in-out duration-200">
-                                PRODUCT
-                            </button>
+                            <Link to={"/products"}>
+                                <button className="mr-7 tracking-widest
+                                hover:text-myRed hover:underline underline-offset-8 hover:text-xl ease-in-out duration-200">
+                                    PRODUCT
+                                </button>
+                            </Link>
                             <button className="mr-7 tracking-wides
                             hover:text-myGreen hover:underline underline-offset-8 hover:text-xl ease-in-out duration-200">
                                 ABOUT US
@@ -40,15 +84,36 @@ export default function Navbar(){
                                     <path className=" group-hover:fill-myGreen ease-in-out duration-200" d="M27.0609 24.8438C25.2762 21.7582 22.5258 19.5457 19.316 18.4969C20.9037 17.5517 22.1372 16.1115 22.8272 14.3974C23.5171 12.6833 23.6253 10.7902 23.1352 9.00864C22.6451 7.2271 21.5837 5.65571 20.114 4.53579C18.6444 3.41586 16.8477 2.80933 15 2.80933C13.1522 2.80933 11.3556 3.41586 9.88595 4.53579C8.41629 5.65571 7.3549 7.2271 6.86476 9.00864C6.37461 10.7902 6.48283 12.6833 7.17278 14.3974C7.86273 16.1115 9.09627 17.5517 10.684 18.4969C7.4742 19.5445 4.72381 21.757 2.93904 24.8438C2.87359 24.9505 2.83018 25.0692 2.81137 25.193C2.79255 25.3168 2.79872 25.4431 2.8295 25.5644C2.86028 25.6858 2.91506 25.7997 2.9906 25.8995C3.06613 25.9994 3.1609 26.0831 3.26931 26.1457C3.37771 26.2083 3.49756 26.2486 3.62179 26.2641C3.74601 26.2797 3.87209 26.2702 3.99258 26.2362C4.11308 26.2023 4.22555 26.1445 4.32337 26.0664C4.42118 25.9882 4.50235 25.8913 4.56209 25.7813C6.7699 21.9656 10.6722 19.6875 15 19.6875C19.3277 19.6875 23.2301 21.9656 25.4379 25.7813C25.4976 25.8913 25.5788 25.9882 25.6766 26.0664C25.7744 26.1445 25.8869 26.2023 26.0074 26.2362C26.1279 26.2702 26.254 26.2797 26.3782 26.2641C26.5024 26.2486 26.6222 26.2083 26.7307 26.1457C26.8391 26.0831 26.9338 25.9994 27.0094 25.8995C27.0849 25.7997 27.1397 25.6858 27.1705 25.5644C27.2012 25.4431 27.2074 25.3168 27.1886 25.193C27.1698 25.0692 27.1264 24.9505 27.0609 24.8438ZM8.43748 11.25C8.43748 9.95207 8.82237 8.68328 9.54346 7.60408C10.2646 6.52489 11.2895 5.68375 12.4886 5.18705C13.6878 4.69035 15.0073 4.5604 16.2803 4.81361C17.5533 5.06683 18.7226 5.69184 19.6404 6.60963C20.5582 7.52741 21.1832 8.69673 21.4364 9.96973C21.6896 11.2427 21.5596 12.5622 21.0629 13.7614C20.5662 14.9605 19.7251 15.9854 18.6459 16.7065C17.5667 17.4276 16.2979 17.8125 15 17.8125C13.2601 17.8107 11.592 17.1187 10.3616 15.8883C9.13135 14.658 8.43934 12.9899 8.43748 11.25Z" fill="white"/>
                                 </svg>
                             </button>
-                            <ul tabIndex={0} className="dropdown-content menu p-2 bg-white w-[10vw]">
-                                <li>
-                                    <Link className=" font-futura-pt-heavy tracking-wider !rounded-none hover:bg-tertiary hover:text-white" to= {"/login"}>
+                            <ul className="dropdown-content menu p-2 bg-white w-[10vw]" tabIndex={0}>
+                                {!noToken ? (
+                                    <li>
+                                    <Link className="font-futura-pt-heavy tracking-wider !rounded-none hover:bg-tertiary hover:text-white" to="/login">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256">
                                             <path fill="currentColor" d="m141.66 133.66l-40 40a8 8 0 0 1-11.32-11.32L116.69 136H24a8 8 0 0 1 0-16h92.69L90.34 93.66a8 8 0 0 1 11.32-11.32l40 40a8 8 0 0 1 0 11.32ZM192 32h-56a8 8 0 0 0 0 16h56v160h-56a8 8 0 0 0 0 16h56a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16Z"/>
                                         </svg>
                                         Log In
                                     </Link>
-                                </li>
+                                    </li>
+                                ) : (
+                                    <>
+                                        <li>
+                                            <Link className="font-futura-pt-heavy tracking-wider !rounded-none hover:bg-tertiary hover:text-white" to={`/dashboard/${userId}`}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256">
+                                                    <path fill="currentColor" d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24ZM74.08 197.5a64 64 0 0 1 107.84 0a87.83 87.83 0 0 1-107.84 0ZM96 120a32 32 0 1 1 32 32a32 32 0 0 1-32-32Zm97.76 66.41a79.66 79.66 0 0 0-36.06-28.75a48 48 0 1 0-59.4 0a79.66 79.66 0 0 0-36.06 28.75a88 88 0 1 1 131.52 0Z"/>
+                                                </svg>
+                                            User Dashboard
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <button className="font-futura-pt-heavy tracking-wider !rounded-none hover:bg-tertiary hover:text-white" onClick={userLogout}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256">
+                                                    <path fill="currentColor" d="M112 216a8 8 0 0 1-8 8H48a16 16 0 0 1-16-16V48a16 16 0 0 1 16-16h56a8 8 0 0 1 0 16H48v160h56a8 8 0 0 1 8 8Zm109.66-93.66l-40-40a8 8 0 0 0-11.32 11.32L196.69 120H104a8 8 0 0 0 0 16h92.69l-26.35 26.34a8 8 0 0 0 11.32 11.32l40-40a8 8 0 0 0 0-11.32Z"/>
+                                                </svg>
+                                                Log out
+                                            </button>
+                                        </li>
+                                    </>
+                                )}
                             </ul>
                         </div>
                         <button className="group ml-7">

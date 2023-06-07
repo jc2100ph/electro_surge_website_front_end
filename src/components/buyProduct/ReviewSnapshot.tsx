@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 export default function ReviewSnapshot(){
 
-    const productId = "647825b58e7fd4bb6c682866"
+    const { id } = useParams()
     const page = 1
 
     const [averageRating, setAverageRating] = useState(0)
@@ -19,8 +20,8 @@ export default function ReviewSnapshot(){
     useEffect(()=>{
         const fetchData = async () => {
             try {
-                const reviewRatingResponse = await axios.get(`http://localhost:4000/review/getReviewRatingData/${productId}`)
-                const reviewDataResponse = await axios.get(`http://localhost:4000/review/getReviewData/${productId}?page=${page}`)
+                const reviewRatingResponse = await axios.get(`${process.env.RENDER_URL}/review/getReviewRatingData/${id}`)
+                const reviewDataResponse = await axios.get(`${process.env.RENDER_URL}/review/getReviewData/${id}?page=${page}`)
                 setAverageRating(reviewRatingResponse.data.averageRating)
                 setReviewAmount(reviewRatingResponse.data.reviewAmount)
                 setTotalFiveStarRating(reviewRatingResponse.data.totalFiveStarRating)

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 export default function HeadArticle(){
     return(
@@ -14,10 +15,12 @@ export default function HeadArticle(){
                             "Experience the electrifying NBA Playoff intensity as basketball's elite athletes compete for championship glory, 
                             fueled by the refreshing energy of Electro Surge sport drink."
                         </p>
-                        <button className=" bg-secondary font-futura-pt-heavy text-xl text-white p-4 w-40 tracking-[0.15em] 
-                        hover:bg-myRed ease-in-out duration-200">
-                            Shop Now
-                        </button>
+                        <Link to={"/products"}>
+                            <button className=" bg-secondary font-futura-pt-heavy text-xl text-white p-4 w-40 tracking-[0.15em] 
+                            hover:bg-myRed ease-in-out duration-200">
+                                Shop Now
+                            </button>
+                        </Link>
                     </div>
                 </section>
 
@@ -27,10 +30,12 @@ export default function HeadArticle(){
                         <p className= " text-tertiary font-futur-pt-medium mb-5">
                         "Get ready for a thrilling ride as the MLB season swings into action, igniting the diamond with unforgettable moments and fierce competition."
                         </p>
-                        <button className=" bg-secondary font-futura-pt-heavy text-xl text-white p-4 w-40 tracking-[0.15em] 
-                        hover:bg-myGreen ease-in-out duration-200">
-                            Shop Now
-                        </button>
+                        <Link to={"/products"}>
+                            <button className=" bg-secondary font-futura-pt-heavy text-xl text-white p-4 w-40 tracking-[0.15em] 
+                            hover:bg-myGreen ease-in-out duration-200">
+                                Shop Now
+                            </button>
+                        </Link>
                     </div>
                     <div>
                         <img className=" object-cover h-[500px] brightness-75 w-full" src="https://ik.imagekit.io/uddq1v9vn/electro_surge_website/mlb.jpg?updatedAt=1685154577986"></img>

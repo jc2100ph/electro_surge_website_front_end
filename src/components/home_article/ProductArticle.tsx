@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function ProductArticle(){
     return (
         <>
@@ -9,10 +11,12 @@ export default function ProductArticle(){
                 <section className=" relative grid grid-cols-3 h-[500px] mt-28">
                     <div className=" bg-[#3845A8] pl-[20%] pr-[20%]">
                         <h1 className=" text-white font-futura-pt-heavy text-3xl tracking-wider pt-10">"Timeless Taste, Revitalize with Classic Flavors!"</h1>
-                        <button className="bg-white font-futura-pt-heavy tracking-[0.15em] text-secondary mt-3 p-3 w-[50%] 
-                        hover:bg-secondary hover:text-white ease-in-out duration-300">
-                            Shop Now
-                        </button>
+                        <Link to={"/products"}>
+                            <button className="bg-white font-futura-pt-heavy tracking-[0.15em] text-secondary mt-3 p-3 w-[50%] 
+                            hover:bg-secondary hover:text-white ease-in-out duration-300">
+                                Shop Now
+                            </button>
+                        </Link>
                     </div>
                     <div className=" bg-[#D21A42]"></div>
                     <div className=" bg-[#007400] pl-[12%]">
@@ -38,10 +42,12 @@ export default function ProductArticle(){
                         Ignite your performance with our dynamic energy drinks. Unleash your potential, fuel your drive, 
                         and reach new heights of productivity and focus. Power up and conquer your goals!
                     </p>
-                    <button className=" text-secondary bg-white font-futura-pt-heavy tracking-[0.15em] text-xl p-4 w-[18%] mt-5
-                    hover:bg-myBlue hover:text-white ease-in-out duration-200">
-                        Explore More
-                    </button>
+                    <Link to={"/products"}>
+                        <button className=" text-secondary bg-white font-futura-pt-heavy tracking-[0.15em] text-xl p-4 w-[18%] mt-5
+                        hover:bg-myBlue hover:text-white ease-in-out duration-200">
+                            Explore More
+                        </button>
+                    </Link>
                     <div className="group">
                         <img className=" absolute h-[82vh] top-[-10%] left-[50%] translate-x-[-50%] brightness-95 drop-shadow-myDropShadow 
                         group-hover:left-[45%] ease-in-out duration-300" 

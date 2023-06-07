@@ -30,7 +30,7 @@ export default function RegisterForm(){
                 return
             }
             
-            const registerResponse = await axios.post("http://localhost:4000/user/register",{
+            const registerResponse = await axios.post(`${process.env.RENDER_URL}/user/register`,{
                 firstName: firstName,
                 lastName: lastName,
                 email: email,

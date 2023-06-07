@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { toast } from 'react-toastify';
 
 
 export default function BuyProduct(){
 
-    const productId = "647825b58e7fd4bb6c682866"
+    const { id } = useParams()
     const [data, setData]: any = useState([])
 
     const [title, setTitle] = useState("")
@@ -22,8 +22,8 @@ export default function BuyProduct(){
     useEffect(()=>{
         const fetchData = async () => {
             try {
-                const productResponse = await axios.get(`http://localhost:4000/product/getProductData/${productId}`)
-                const ReviewRatingResponse = await axios.get(`http://localhost:4000/review/getReviewRatingData/${productId}`)
+                const productResponse = await axios.get(`${process.env.RENDER_URL}/product/getProductData/${id}`)
+                const ReviewRatingResponse = await axios.get(`${process.env.RENDER_URL}/review/getReviewRatingData/${id}`)
                 setData(productResponse.data)
                 setTitle(productResponse.data.name)
                 setDescription(productResponse.data.description)
@@ -75,8 +75,8 @@ export default function BuyProduct(){
     const addToCart = async (e: { preventDefault: () => void; }) => {
         try {
             e.preventDefault()
-            const responseAddToCart = await axios.post("http://localhost:4000/user/addToCart",{
-                orderProductId: productId,
+            const responseAddToCart = await axios.post(`${process.env.RENDER_URL}/user/addToCart`,{
+                orderProductId: id,
                 orderName: title,
                 orderColor: flavor,
                 orderPictureUrl: pictureUrl,
