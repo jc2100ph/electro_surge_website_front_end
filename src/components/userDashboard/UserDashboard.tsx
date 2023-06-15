@@ -4,22 +4,23 @@ import { Link } from "react-router-dom"
 
 
 
-export default function UserDashboard(){
+export default function UserDashboard() {
 
     const [data, setData] = useState(
-        { userData: { firstName: "", lastName: "" , email: "", _id:"" },
-        findOrder: {_id: "", itemQuantity: 0, totalPrice: 0, dateOrdered: "", status: ""},
-        findCart: {userCart:[{orderPictureUrl: "", orderName:"", orderQuantity:0, orderPrice:0, _id:""}]},
-        CartTotalPrice: ""
-    });
+        {
+            userData: { firstName: "", lastName: "", email: "", _id: "" },
+            findOrder: { _id: "", itemQuantity: 0, totalPrice: 0, dateOrdered: "", status: "" },
+            findCart: { userCart: [{ orderPictureUrl: "", orderName: "", orderQuantity: 0, orderPrice: 0, _id: "" }] },
+            CartTotalPrice: ""
+        });
 
     useEffect(() => {
-        const fetchData =async () => {
+        const fetchData = async () => {
             try {
-                const userResponse = await axios.get(`https://electro-surge-website-back-end.onrender.com/user/getUserData`, {
+                const userResponse = await axios.get(`${import.meta.env.VITE_URL}/user/getUserData`, {
                     withCredentials: true,
                     headers: {
-                    'Content-Type': 'application/json'
+                        'Content-Type': 'application/json'
                     }
                 })
                 setData(userResponse.data)
@@ -27,12 +28,12 @@ export default function UserDashboard(){
                 console.log(error)
             }
         }
-        fetchData()    
-    },[])
+        fetchData()
+    }, [])
 
 
     const cart = data.findCart.userCart.map((userCart) => {
-        return(
+        return (
             <>
                 <section key={userCart._id} className="flex gap-4 items-center">
                     <div>
@@ -43,20 +44,23 @@ export default function UserDashboard(){
                         <p className=" font-futura-pt-book tracking-wider">Quantity: {userCart.orderQuantity}</p>
                         <p className=" font-futura-pt-book tracking-wide">Price: {userCart.orderPrice}</p>
                         <button className=" border-solid border-secondary border-2 p-2 w-[70%] font-futura-pt-heavy tracking-[0.15em]
-                        hover:bg-secondary hover:text-white ease-in-out duration-200" 
-                        onClick={async (e) => {
-                            try {
-                                e.preventDefault()
-                                // @ts-ignore
-                                const removeFromCart = await axios.post(`https://electro-surge-website-back-end.onrender.com/user/removeFromCart/${userCart._id}`,{
-                                } ,{ withCredentials: true, 
-                                    headers: {'Content-Type': 'application/json'
-                                }})
-                                window.location.reload()
-                            } catch (error) {
-                                console.log(error)
-                            }
-                        }}>
+                        hover:bg-secondary hover:text-white ease-in-out duration-200"
+                            onClick={async (e) => {
+                                try {
+                                    e.preventDefault()
+                                    // @ts-ignore
+                                    const removeFromCart = await axios.post(`${import.meta.env.VITE_URL}/user/removeFromCart/${userCart._id}`, {
+                                    }, {
+                                        withCredentials: true,
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        }
+                                    })
+                                    window.location.reload()
+                                } catch (error) {
+                                    console.log(error)
+                                }
+                            }}>
                             Remove From Cart
                         </button>
                     </div>
@@ -65,7 +69,7 @@ export default function UserDashboard(){
         )
     })
 
-    if(data === null){
+    if (data === null) {
         return (
             <>
                 <h1>Loading</h1>
@@ -73,7 +77,7 @@ export default function UserDashboard(){
         )
     }
 
-    return(
+    return (
         <>
             <div className="place w-90%  ml-auto mr-auto mb-20">
                 <div className="breadcrumbs mb-10">
@@ -82,7 +86,7 @@ export default function UserDashboard(){
                             <Link to={"/"}>
                                 <a>Home</a>
                             </Link>
-                        </li> 
+                        </li>
                         <li className=" font-futura-pt-heavy tracking-wider">User</li>
                     </ul>
                 </div>

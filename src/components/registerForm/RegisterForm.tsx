@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import axios from "axios";
 
-export default function RegisterForm(){
+export default function RegisterForm() {
 
     const navigate = useNavigate()
     const [firstName, setFirstName] = useState("")
@@ -16,7 +16,7 @@ export default function RegisterForm(){
         try {
             e.preventDefault()
 
-            if(password !== verifyPassword){
+            if (password !== verifyPassword) {
                 toast.error('verify Password doesnt match Password', {
                     position: "top-right",
                     autoClose: 5000,
@@ -29,17 +29,17 @@ export default function RegisterForm(){
                 });
                 return
             }
-            
-            const registerResponse = await axios.post(`https://electro-surge-website-back-end.onrender.com/user/register`,{
+
+            const registerResponse = await axios.post(`${import.meta.env.VITE_URL}/user/register`, {
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
                 password: password
-            },{ headers: {'Content-Type': 'application/json'}})
+            }, { headers: { 'Content-Type': 'application/json' } })
 
             console.log(registerResponse)
 
-            if(registerResponse.data === true){
+            if (registerResponse.data === true) {
                 toast.success('User Successfully Registered', {
                     position: "top-right",
                     autoClose: 2000,
@@ -50,8 +50,8 @@ export default function RegisterForm(){
                     progress: undefined,
                     theme: "colored",
                 });
-                return setTimeout(() => {navigate("/login")}, 3000);
-            }else{
+                return setTimeout(() => { navigate("/login") }, 3000);
+            } else {
                 toast.error('Failed to register user', {
                     position: "top-right",
                     autoClose: 5000,
@@ -70,7 +70,7 @@ export default function RegisterForm(){
     }
 
 
-    return(
+    return (
         <>
             <div className="place w-90%  ml-auto mr-auto mb-20">
                 <div className="breadcrumbs mb-10">
@@ -79,7 +79,7 @@ export default function RegisterForm(){
                             <Link to={"/"}>
                                 <a>Home</a>
                             </Link>
-                        </li> 
+                        </li>
                         <li className=" font-futura-pt-heavy tracking-wider">Register</li>
                     </ul>
                 </div>
@@ -89,36 +89,36 @@ export default function RegisterForm(){
                     <form className="grid place-items-center mb-10" onSubmit={registerUser}>
                         <div className="flex flex-col mb-16">
                             <label className=" font-futur-pt-medium tracking-wider text-tertiary text-xl mb-2" htmlFor="firstName">First Name</label>
-                            <input className="bg-myTransparent h-[40px] w-[400px] p-5 font-futura-pt-heavy tracking-wider" 
-                            type="text" name="firstName" id="firstName" onChange={(e) => setFirstName(e.target.value)} required/>
+                            <input className="bg-myTransparent h-[40px] w-[400px] p-5 font-futura-pt-heavy tracking-wider"
+                                type="text" name="firstName" id="firstName" onChange={(e) => setFirstName(e.target.value)} required />
                         </div>
                         <div className="flex flex-col mb-16">
                             <label className=" font-futur-pt-medium tracking-wider text-tertiary text-xl mb-2" htmlFor="lastName">Last Name</label>
-                            <input className="bg-myTransparent h-[40px] w-[400px] p-5 font-futura-pt-heavy tracking-wider" 
-                            type="text" name="lastName" id="lastName" onChange={(e) => setLastName(e.target.value)} required/>
+                            <input className="bg-myTransparent h-[40px] w-[400px] p-5 font-futura-pt-heavy tracking-wider"
+                                type="text" name="lastName" id="lastName" onChange={(e) => setLastName(e.target.value)} required />
                         </div>
                         <div className="flex flex-col mb-16">
                             <label className=" font-futur-pt-medium tracking-wider text-tertiary text-xl mb-2" htmlFor="emailAddress">Email Address</label>
-                            <input className="bg-myTransparent h-[40px] w-[400px] p-5 font-futura-pt-heavy tracking-wider" 
-                            type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)} required/>
+                            <input className="bg-myTransparent h-[40px] w-[400px] p-5 font-futura-pt-heavy tracking-wider"
+                                type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)} required />
                         </div>
                         <div className="flex flex-col mb-16">
                             <label className=" font-futur-pt-medium tracking-wider text-tertiary text-xl mb-2" htmlFor="password">Password</label>
-                            <input className="bg-myTransparent h-[40px] w-[400px] p-5 font-futura-pt-heavy tracking-wider" 
-                            type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} required/>
+                            <input className="bg-myTransparent h-[40px] w-[400px] p-5 font-futura-pt-heavy tracking-wider"
+                                type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} required />
                         </div>
                         <div className="flex flex-col mb-16">
                             <label className=" font-futur-pt-medium tracking-wider text-tertiary text-xl mb-2" htmlFor="verifyPassword">Verify Password</label>
-                            <input className="bg-myTransparent h-[40px] w-[400px] p-5 font-futura-pt-heavy tracking-wider" 
-                            type="password" name="verifyPassword" id="verifyPassword" onChange={(e) => setverifyPassword(e.target.value)} required/>
+                            <input className="bg-myTransparent h-[40px] w-[400px] p-5 font-futura-pt-heavy tracking-wider"
+                                type="password" name="verifyPassword" id="verifyPassword" onChange={(e) => setverifyPassword(e.target.value)} required />
                         </div>
                         <div className="flex justify-center gap-3 items-center mb-16">
-                            <input type="checkbox" className="checkbox checkbox-lg" required/>
+                            <input type="checkbox" className="checkbox checkbox-lg" required />
                             <p className=" font-futur-pt-medium tracking-wider place-self-center w-[350px] text-center text-tertiary">
-                                Yes, I'd like to opt-in to receive additional product information, news and special offers from Electro Surge. 
-                                Please see our 
-                                <a className="underline underline-offset-2" href=""> Privacy Policy </a>, 
-                                <a className="underline underline-offset-2" href=""> Terms of Use </a> 
+                                Yes, I'd like to opt-in to receive additional product information, news and special offers from Electro Surge.
+                                Please see our
+                                <a className="underline underline-offset-2" href=""> Privacy Policy </a>,
+                                <a className="underline underline-offset-2" href=""> Terms of Use </a>
                                 and About our Ads for details -- you may opt out at any time.
                             </p>
                         </div>

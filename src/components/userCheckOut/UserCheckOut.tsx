@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import { toast } from 'react-toastify';
 
-export default function UserCheckOut(){
+export default function UserCheckOut() {
 
     const navigate = useNavigate()
 
-    const [data, setData] = useState({ 
-        userData: { firstName: "", lastName: ""},
-        findCart: {userCart:[{orderPictureUrl: "", orderName:"", orderQuantity:0, orderPrice:0, _id:""}]},
+    const [data, setData] = useState({
+        userData: { firstName: "", lastName: "" },
+        findCart: { userCart: [{ orderPictureUrl: "", orderName: "", orderQuantity: 0, orderPrice: 0, _id: "" }] },
         CartTotalPrice: ""
     })
 
@@ -20,14 +20,14 @@ export default function UserCheckOut(){
     const [region, setRegion] = useState("")
 
     const completeAddress = `${place}, ${city}, ${region}, ${zipCode}, ${country}`
-    
+
     useEffect(() => {
-        const fetchData =async () => {
+        const fetchData = async () => {
             try {
-                const userResponse = await axios.get(`https://electro-surge-website-back-end.onrender.com/user/getUserData`, {
+                const userResponse = await axios.get(`${import.meta.env.VITE_URL}/user/getUserData`, {
                     withCredentials: true,
                     headers: {
-                    'Content-Type': 'application/json'
+                        'Content-Type': 'application/json'
                     }
                 })
                 setData(userResponse.data)
@@ -35,11 +35,11 @@ export default function UserCheckOut(){
                 console.log(error)
             }
         }
-        fetchData()    
-    },[])
+        fetchData()
+    }, [])
 
-    const cart = data.findCart.userCart.map((userCart : any) => {
-        return(
+    const cart = data.findCart.userCart.map((userCart: any) => {
+        return (
             <>
                 <section key={userCart._id} className="flex gap-4 items-center">
                     <div>
@@ -58,13 +58,16 @@ export default function UserCheckOut(){
     const checkOut = async () => {
         try {
             // @ts-ignore
-            const createOrderResponse = await axios.post(`https://electro-surge-website-back-end.onrender.com/order/createOrder`,{
+            const createOrderResponse = await axios.post(`${import.meta.env.VITE_URL}/order/createOrder`, {
                 itemQuantity: 0,
                 totalPrice: data.CartTotalPrice,
                 address: completeAddress
-            } ,{ withCredentials: true, 
-                headers: {'Content-Type': 'application/json'
-            }})
+            }, {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
             toast.success('Successfully Added Product', {
                 position: "top-right",
                 autoClose: 2000,
@@ -75,21 +78,21 @@ export default function UserCheckOut(){
                 progress: undefined,
                 theme: "colored",
             });
-            return setTimeout(() => {navigate("/")}, 3000);
+            return setTimeout(() => { navigate("/") }, 3000);
         } catch (error) {
             console.log(error)
         }
     }
 
-    if(data === null){
+    if (data === null) {
         return (
             <>
                 <h1>Loading</h1>
             </>
         )
     }
-    
-    return(
+
+    return (
         <>
             <section className="w-90% ml-auto mr-auto mb-20 grid grid-cols-2 gap-10">
                 <div className=" font-futur-pt-medium tracking-wider text-tertiary text-xl">
@@ -104,32 +107,32 @@ export default function UserCheckOut(){
                         </div>
                         <div className=" flex flex-col mb-3">
                             <label htmlFor="country">Country:</label>
-                            <select className=" bg-myTransparent p-2" name="country" id="country" 
-                            onChange={(e) => setCountry(e.target.value)} value={country}>
+                            <select className=" bg-myTransparent p-2" name="country" id="country"
+                                onChange={(e) => setCountry(e.target.value)} value={country}>
                                 <option value="Philippines">Philippines</option>
                             </select>
                         </div>
                         <div className=" flex flex-col mb-8">
                             <label htmlFor="place">Apartment Suite, Etc:</label>
                             <input className=" bg-myTransparent p-2" type="text" name="place" id="place"
-                            onChange={(e) => {setPlace(e.target.value)}} required/>
+                                onChange={(e) => { setPlace(e.target.value) }} required />
                         </div>
                         <div className=" flex items-center justify-between mb-3">
                             <div className=" flex flex-col w-[48%]">
                                 <label htmlFor="zipCode">Zip Code:</label>
                                 <input className=" bg-myTransparent p-2" type="text" name="zipCode" id="zipCode"
-                                onChange={(e) => {setZipCode(e.target.value)}} required/>
+                                    onChange={(e) => { setZipCode(e.target.value) }} required />
                             </div>
                             <div className=" flex flex-col w-[48%]">
                                 <label htmlFor="city">City:</label>
                                 <input className=" bg-myTransparent p-2" type="text" name="city" id="city"
-                                onChange={(e) => {setCity(e.target.value)}} required/>
+                                    onChange={(e) => { setCity(e.target.value) }} required />
                             </div>
                         </div>
                         <div className=" flex flex-col mb-10">
                             <label htmlFor="region">Region:</label>
                             <input className=" bg-myTransparent p-2" type="text" name="region" id="region"
-                            onChange={(e) => {setRegion(e.target.value)}} required/>
+                                onChange={(e) => { setRegion(e.target.value) }} required />
                         </div>
                         <button className=" bg-secondary p-3 font-futura-pt-heavy tracking-[0.15em] text-white w-[50%]" onClick={checkOut}>
                             Check Out Now
