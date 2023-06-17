@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import axios from "axios";
+import { useDispatch } from 'react-redux'
+import { userIsLogin } from "../../store/login/loginSlice"
+import { setUserId } from "../../store/user/userSlice"
 
 export default function LoginForm() {
 
@@ -12,6 +15,8 @@ export default function LoginForm() {
 
     const [noUser, setNoUser] = useState(false)
     const [wrongPassword, setWrongPassword] = useState(false)
+
+    const dispatch = useDispatch()
 
     const loginUser = async (e: { preventDefault: () => void; }) => {
         try {
@@ -26,7 +31,6 @@ export default function LoginForm() {
                     'Content-Type': 'application/json'
                 }
             })
-            console.log(loginResponse)
             if (loginResponse.status === 200) {
                 toast.success(`${loginResponse.data.success}`, {
                     position: "top-right",
@@ -38,6 +42,8 @@ export default function LoginForm() {
                     progress: undefined,
                     theme: "colored",
                 })
+                dispatch(userIsLogin())
+                dispatch(setUserId(loginResponse.data.userId))
                 setTimeout(() => {
                     navigate("/products")
                 }, 2000);

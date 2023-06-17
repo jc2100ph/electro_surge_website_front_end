@@ -44,7 +44,6 @@ export default function RegisterForm() {
                 password: password
             }, { headers: { 'Content-Type': 'application/json' } })
 
-            console.log(registerResponse)
             if (registerResponse.status === 201) {
                 toast.success(`${registerResponse.data.success}`, {
                     position: "top-right",

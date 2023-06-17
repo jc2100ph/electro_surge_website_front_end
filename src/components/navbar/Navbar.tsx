@@ -1,41 +1,20 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import type { RootState } from '../../store/store'
+import { useSelector, useDispatch } from 'react-redux'
+import { userIsNotLogin } from "../../store/login/loginSlice"
+import { clearUserId } from "../../store/user/userSlice"
 
 export default function Navbar() {
     const navigate = useNavigate()
-    const [isThereALoginUser, setIsThereALoginUser] = useState(false)
-    const [userId, setUserId] = useState("")
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const userResponse = await axios.get(`${import.meta.env.VITE_URL}/user/getUserData`, {
-                    withCredentials: true,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                if (userResponse.data === "no token") {
-                    setIsThereALoginUser(false)
-                } else {
-                    setIsThereALoginUser(true)
-                }
-
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        fetchData()
-        console.log(isThereALoginUser)
-    }, []);
-
-
+    const hasUserLogin = useSelector((state: RootState) => state.hasUserLogin.value)
+    const userId = useSelector((state: RootState) => state.userId.userId)
+    const dispatch = useDispatch()
+    console.log(userId)
     const userLogout = async (e: { preventDefault: () => void; }) => {
         try {
             e.preventDefault()
-            // @ts-ignore
-            const logOutResponse = await axios.post(`${import.meta.env.VITE_URL}/user/logout`, {
+            await axios.post(`${import.meta.env.VITE_URL}/user/logout`, {
             }, {
                 withCredentials: true,
                 headers: {
@@ -43,13 +22,13 @@ export default function Navbar() {
                 }
             }
             )
+            dispatch(clearUserId())
+            dispatch(userIsNotLogin())
             navigate("/")
-            window.location.reload()
         } catch (error) {
             console.error(error);
         }
     }
-
     const rightSideComponents = () => {
         return (
             <div className="flex items-center gap-7">
@@ -95,30 +74,38 @@ export default function Navbar() {
                         </svg>
                     </button>
                     <ul className="dropdown-content menu p-2 bg-white w-[10vw]" tabIndex={0}>
-                        <li>
-                            <Link className="font-futura-pt-heavy tracking-wider !rounded-none hover:bg-tertiary hover:text-white" to="/login">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256">
-                                    <path fill="currentColor" d="m141.66 133.66l-40 40a8 8 0 0 1-11.32-11.32L116.69 136H24a8 8 0 0 1 0-16h92.69L90.34 93.66a8 8 0 0 1 11.32-11.32l40 40a8 8 0 0 1 0 11.32ZM192 32h-56a8 8 0 0 0 0 16h56v160h-56a8 8 0 0 0 0 16h56a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16Z" />
-                                </svg>
-                                Log In
-                            </Link>
-                        </li>
-                        <li>
-                            <Link className="font-futura-pt-heavy tracking-wider !rounded-none hover:bg-tertiary hover:text-white" to={`/dashboard/${userId}`}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256">
-                                    <path fill="currentColor" d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24ZM74.08 197.5a64 64 0 0 1 107.84 0a87.83 87.83 0 0 1-107.84 0ZM96 120a32 32 0 1 1 32 32a32 32 0 0 1-32-32Zm97.76 66.41a79.66 79.66 0 0 0-36.06-28.75a48 48 0 1 0-59.4 0a79.66 79.66 0 0 0-36.06 28.75a88 88 0 1 1 131.52 0Z" />
-                                </svg>
-                                User Dashboard
-                            </Link>
-                        </li>
-                        <li>
-                            <button className="font-futura-pt-heavy tracking-wider !rounded-none hover:bg-tertiary hover:text-white" onClick={userLogout}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256">
-                                    <path fill="currentColor" d="M112 216a8 8 0 0 1-8 8H48a16 16 0 0 1-16-16V48a16 16 0 0 1 16-16h56a8 8 0 0 1 0 16H48v160h56a8 8 0 0 1 8 8Zm109.66-93.66l-40-40a8 8 0 0 0-11.32 11.32L196.69 120H104a8 8 0 0 0 0 16h92.69l-26.35 26.34a8 8 0 0 0 11.32 11.32l40-40a8 8 0 0 0 0-11.32Z" />
-                                </svg>
-                                Log out
-                            </button>
-                        </li>
+                        {
+                            (hasUserLogin === false) ?
+                                <>
+                                    <li>
+                                        <Link className="font-futura-pt-heavy tracking-wider !rounded-none hover:bg-tertiary hover:text-white" to="/login">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256">
+                                                <path fill="currentColor" d="m141.66 133.66l-40 40a8 8 0 0 1-11.32-11.32L116.69 136H24a8 8 0 0 1 0-16h92.69L90.34 93.66a8 8 0 0 1 11.32-11.32l40 40a8 8 0 0 1 0 11.32ZM192 32h-56a8 8 0 0 0 0 16h56v160h-56a8 8 0 0 0 0 16h56a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16Z" />
+                                            </svg>
+                                            Log In
+                                        </Link>
+                                    </li>
+                                </>
+                                :
+                                <>
+                                    <li>
+                                        <Link className=" p-2 font-futura-pt-heavy tracking-wider !rounded-none hover:bg-tertiary hover:text-white" to={`/dashboard/${userId}`} >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256">
+                                                <path fill="currentColor" d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24ZM74.08 197.5a64 64 0 0 1 107.84 0a87.83 87.83 0 0 1-107.84 0ZM96 120a32 32 0 1 1 32 32a32 32 0 0 1-32-32Zm97.76 66.41a79.66 79.66 0 0 0-36.06-28.75a48 48 0 1 0-59.4 0a79.66 79.66 0 0 0-36.06 28.75a88 88 0 1 1 131.52 0Z" />
+                                            </svg>
+                                            User Dashboard
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <button className=" p-2 font-futura-pt-heavy tracking-wider !rounded-none hover:bg-tertiary hover:text-white" onClick={userLogout}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256">
+                                                <path fill="currentColor" d="M112 216a8 8 0 0 1-8 8H48a16 16 0 0 1-16-16V48a16 16 0 0 1 16-16h56a8 8 0 0 1 0 16H48v160h56a8 8 0 0 1 8 8Zm109.66-93.66l-40-40a8 8 0 0 0-11.32 11.32L196.69 120H104a8 8 0 0 0 0 16h92.69l-26.35 26.34a8 8 0 0 0 11.32 11.32l40-40a8 8 0 0 0 0-11.32Z" />
+                                            </svg>
+                                            Log out
+                                        </button>
+                                    </li>
+                                </>
+                        }
                     </ul>
                 </div>
                 <button className="group ml-7">
