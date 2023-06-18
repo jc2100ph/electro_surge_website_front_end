@@ -76,12 +76,12 @@ export default function BuyProduct() {
         try {
             e.preventDefault()
             const responseAddToCart = await axios.post(`${import.meta.env.VITE_URL}/user/addToCart`, {
-                orderProductId: id,
-                orderName: title,
-                orderColor: flavor,
-                orderPictureUrl: pictureUrl,
-                orderQuantity: quantity,
-                orderPrice: totalOrderPrice
+                cartProductId: id,
+                cartName: title,
+                cartColor: flavor,
+                cartPictureUrl: pictureUrl,
+                cartQuantity: quantity,
+                cartPrice: totalOrderPrice
             }, {
                 withCredentials: true,
                 headers: {

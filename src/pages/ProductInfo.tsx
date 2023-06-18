@@ -4,8 +4,8 @@ import Spacer from '../components/Spacer';
 import BuyProduct from '../components/buyProduct/BuyProduct';
 import ReviewSnapshot from '../components/buyProduct/ReviewSnapshot';
 
-export default function ProductInfo(){
-    return(
+export default function ProductInfo() {
+    return (
         <>
             <Navbar />
             <Spacer />
