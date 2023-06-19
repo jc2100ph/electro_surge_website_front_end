@@ -10,7 +10,7 @@ export default function Navbar() {
     const hasUserLogin = useSelector((state: RootState) => state.hasUserLogin.value)
     const userId = useSelector((state: RootState) => state.userId.userId)
     const dispatch = useDispatch()
-    console.log(userId)
+
     const userLogout = async (e: { preventDefault: () => void; }) => {
         try {
             e.preventDefault()

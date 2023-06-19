@@ -8,6 +8,7 @@ export default function BuyProduct() {
 
     const { id } = useParams()
     const [data, setData]: any = useState([])
+    const [loading, setLoading] = useState(false)
 
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
@@ -75,6 +76,7 @@ export default function BuyProduct() {
     const addToCart = async (e: { preventDefault: () => void; }) => {
         try {
             e.preventDefault()
+            setLoading(true)
             const responseAddToCart = await axios.post(`${import.meta.env.VITE_URL}/user/addToCart`, {
                 cartProductId: id,
                 cartName: title,
@@ -88,31 +90,19 @@ export default function BuyProduct() {
                     'Content-Type': 'application/json'
                 }
             })
-
-            if (responseAddToCart.data === true) {
-                toast.success('Successfully add to cart', {
+            if (responseAddToCart.data.success) {
+                toast.success("Successfully Added to Cart", {
                     position: "top-right",
-                    autoClose: 5000,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
                     theme: "colored",
-                });
-            } else if (responseAddToCart.data === "no token") {
-                toast.warn('Login in first', {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                });
-            } else {
-                toast.error('Something went wrong try again', {
+                })
+            } else if (responseAddToCart.data = "no token") {
+                toast.warn("Please Login first", {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -125,27 +115,37 @@ export default function BuyProduct() {
             }
         } catch (error) {
             console.log(error)
+        } finally {
+            setTimeout(() => {
+                setLoading(false)
+            }, 2000);
         }
+    }
+
+    const breadCrumbs = () => {
+        return (
+            <div className="breadcrumbs mb-10">
+                <ul>
+                    <li className=" font-futura-pt-book tracking-wider hover:font-futura-pt-heavy ">
+                        <Link to={"/"}>
+                            <a>Home</a>
+                        </Link>
+                    </li>
+                    <li className=" font-futura-pt-book tracking-wider hover:font-futura-pt-heavy ">
+                        <Link to={"/products"}>
+                            <a>All Product</a>
+                        </Link>
+                    </li>
+                    <li className=" font-futura-pt-heavy tracking-wider">Sports Drink</li>
+                </ul>
+            </div>
+        )
     }
 
     return (
         <>
             <div className="w-90%  ml-auto mr-auto mb-20">
-                <div className="breadcrumbs mb-10">
-                    <ul>
-                        <li className=" font-futura-pt-book tracking-wider hover:font-futura-pt-heavy ">
-                            <Link to={"/"}>
-                                <a>Home</a>
-                            </Link>
-                        </li>
-                        <li className=" font-futura-pt-book tracking-wider hover:font-futura-pt-heavy ">
-                            <Link to={"/products"}>
-                                <a>All Product</a>
-                            </Link>
-                        </li>
-                        <li className=" font-futura-pt-heavy tracking-wider">Sports Drink</li>
-                    </ul>
-                </div>
+                {breadCrumbs()}
 
                 <section className="grid grid-cols-2 gap-5 mb-20">
                     <div className=" border-secondary border-2 brightness-90 drop-shadow-myDropShadow ">
@@ -187,10 +187,22 @@ export default function BuyProduct() {
                             {flavorOptions}
                         </select>
                         <br></br>
-                        <button className=" p-3 w-[300px] font-futura-pt-heavy text-2xl tracking-[0.15em] bg-secondary text-white 
-                        hover:bg-myGreen ease-in-out duration-200" onClick={addToCart}>
-                            Add To Cart
-                        </button>
+                        {
+                            (loading === true) ?
+                                <>
+                                    <button className=" p-3 w-[300px] font-futura-pt-heavy text-2xl tracking-[0.15em] bg-secondary text-white 
+                                    hover:bg-myGreen ease-in-out duration-200" onClick={addToCart}>
+                                        <span className="loading loading-spinner loading-sm"></span>
+                                    </button>
+                                </>
+                                :
+                                <>
+                                    <button className=" p-3 w-[300px] font-futura-pt-heavy text-2xl tracking-[0.15em] bg-secondary text-white 
+                                    hover:bg-myGreen ease-in-out duration-200" onClick={addToCart}>
+                                        Add To Cart
+                                    </button>
+                                </>
+                        }
                     </div>
                 </section>
 
