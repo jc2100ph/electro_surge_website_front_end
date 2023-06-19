@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/jc2100ph/electro_surge_website_front_end/compare/v1.0.0...v1.3.0) (2023-06-19)
+
+
+### Features
+
+* add react toolkit and implement it on LoginForm and Navbar ([907ee20](https://github.com/jc2100ph/electro_surge_website_front_end/commit/907ee200215963bf7003a30bcd00c6f20ee167bb))
+
+
+### Bug Fixes
+
+* **BuyProduct:** change response condition to let toastify show correct banner ([0d30fb6](https://github.com/jc2100ph/electro_surge_website_front_end/commit/0d30fb63f0a21cdbf74c48c62a30282e5ab0e134))
+
 ## [1.0.0](https://github.com/jc2100ph/electro_surge_website_front_end/compare/v0.3.0...v1.0.0) (2023-06-07)
 
 
