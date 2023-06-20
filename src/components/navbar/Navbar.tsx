@@ -14,7 +14,7 @@ export default function Navbar() {
     const userLogout = async (e: { preventDefault: () => void; }) => {
         try {
             e.preventDefault()
-            await axios.post(`${import.meta.env.VITE_URL}/user/logout`, {
+            const logoutResponse = await axios.post(`${import.meta.env.VITE_URL}/user/logout`, {
             }, {
                 withCredentials: true,
                 headers: {
@@ -22,6 +22,7 @@ export default function Navbar() {
                 }
             }
             )
+            console.log(logoutResponse)
             dispatch(clearUserId())
             dispatch(userIsNotLogin())
             navigate("/")
