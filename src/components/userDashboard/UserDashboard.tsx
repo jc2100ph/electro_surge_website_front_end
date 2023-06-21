@@ -6,13 +6,16 @@ import { Link } from "react-router-dom"
 
 export default function UserDashboard() {
 
-    const [data, setData] = useState(
-        {
-            userData: { firstName: "", lastName: "", email: "", _id: "" },
-            findOrder: { _id: "", itemQuantity: 0, totalPrice: 0, dateOrdered: "", status: "" },
-            findCart: { userCart: [{ orderPictureUrl: "", orderName: "", orderQuantity: 0, orderPrice: 0, _id: "" }] },
-            CartTotalPrice: ""
-        });
+    const [data, setData] = useState({
+        userData: { _id: "", firstName: "", lastName: "", email: "" },
+        findOrder: { _id: "", itemQuantity: 0, totalPrice: 0, dateOrdered: 0, status: "" },
+        findCart: {
+            _id: "",
+            userId: "",
+            totalCartPrice: 0,
+            userCart: [{ _id: "", cartPictureUrl: "", cartName: "", cartQuantity: 0, cartPrice: 0 }]
+        }
+    })
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,50 +27,59 @@ export default function UserDashboard() {
                     }
                 })
                 setData(userResponse.data)
+
             } catch (error) {
                 console.log(error)
             }
         }
         fetchData()
+
     }, [])
+    console.log(data)
 
 
-    const cart = data.findCart.userCart.map((userCart) => {
-        return (
-            <>
-                <section key={userCart._id} className="flex gap-4 items-center">
-                    <div>
-                        <img className="w-[60px]" src={`${userCart.orderPictureUrl}`} alt="" />
-                    </div>
-                    <div>
-                        <h1 className=" font-futura-pt-heavy tracking-wider">{userCart.orderName}</h1>
-                        <p className=" font-futura-pt-book tracking-wider">Quantity: {userCart.orderQuantity}</p>
-                        <p className=" font-futura-pt-book tracking-wide">Price: {userCart.orderPrice}</p>
-                        <button className=" border-solid border-secondary border-2 p-2 w-[70%] font-futura-pt-heavy tracking-[0.15em]
-                        hover:bg-secondary hover:text-white ease-in-out duration-200"
-                            onClick={async (e) => {
-                                try {
-                                    e.preventDefault()
-                                    // @ts-ignore
-                                    const removeFromCart = await axios.post(`${import.meta.env.VITE_URL}/user/removeFromCart/${userCart._id}`, {
-                                    }, {
+
+    let cart
+
+    if (data.findCart.userCart && data.findCart.userCart.length > 0) {
+        cart = data.findCart.userCart.map((userCart: any) => (
+            <section key={userCart._id} className="flex gap-4 items-center">
+                <div>
+                    <img className="w-[60px]" src={`${userCart.cartPictureUrl}`} alt="" />
+                </div>
+                <div>
+                    <h1 className="font-futura-pt-heavy tracking-wider">{userCart.cartName}</h1>
+                    <p className="font-futura-pt-book tracking-wider">Quantity: {userCart.cartQuantity}</p>
+                    <p className="font-futura-pt-book tracking-wide">Price: {userCart.cartPrice}</p>
+                    <button
+                        className="border-solid border-secondary border-2 p-2 w-[70%] font-futura-pt-heavy tracking-[0.15em] hover:bg-secondary hover:text-white ease-in-out duration-200"
+                        onClick={async (e) => {
+                            try {
+                                e.preventDefault();
+                                await axios.post(
+                                    `${import.meta.env.VITE_URL}/user/removeFromCart/${userCart._id}`,
+                                    {},
+                                    {
                                         withCredentials: true,
                                         headers: {
-                                            'Content-Type': 'application/json'
-                                        }
-                                    })
-                                    window.location.reload()
-                                } catch (error) {
-                                    console.log(error)
-                                }
-                            }}>
-                            Remove From Cart
-                        </button>
-                    </div>
-                </section>
-            </>
-        )
-    })
+                                            'Content-Type': 'application/json',
+                                        },
+                                    }
+                                );
+                                window.location.reload();
+                            } catch (error) {
+                                console.log(error);
+                            }
+                        }}
+                    >
+                        Remove From Cart
+                    </button>
+                </div>
+            </section>
+        ));
+    } else {
+        cart = <p>No cart</p>;
+    }
 
     if (data === null) {
         return (
@@ -104,15 +116,24 @@ export default function UserDashboard() {
                         <h2 className="font-futura-pt-heavy text-3xl tracking-wider mb-4">Order History</h2>
                         <div>
                             <div className="flex gap-5 font-futur-pt-medium tracking-wider">
-                                <div>
-                                    <p>Order Id: {data.findOrder._id}</p>
-                                    <p>Item Quantity: {data.findOrder.itemQuantity}</p>
-                                    <p>Total Price: {data.findOrder.totalPrice}</p>
-                                </div>
-                                <div>
-                                    <p>Order Placed: {data.findOrder.dateOrdered}</p>
-                                    <p>Status: {data.findOrder.status}</p>
-                                </div>
+                                {
+                                    (data.findOrder === null) ?
+                                        <>
+                                            <p>No orders</p>
+                                        </>
+                                        :
+                                        <>
+                                            <div>
+                                                <p>Order Id: {data.findOrder._id}</p>
+                                                <p>Item Quantity: {data.findOrder.itemQuantity}</p>
+                                                <p>Total Price: {data.findOrder.totalPrice}</p>
+                                            </div>
+                                            <div>
+                                                <p>Order Placed: {data.findOrder.dateOrdered}</p>
+                                                <p>Status: {data.findOrder.status}</p>
+                                            </div>
+                                        </>
+                                }
                             </div>
                         </div>
                     </div>
@@ -122,7 +143,7 @@ export default function UserDashboard() {
                         <div className="mb-5">
                             {cart}
                         </div>
-                        <p className=" font-futura-pt-heavy tracking-wider text-xl">Total Price: ₱{data.CartTotalPrice}</p>
+                        <p className=" font-futura-pt-heavy tracking-wider text-xl">Total Price: ₱{data.findCart.totalCartPrice}</p>
                         <Link to={`/checkout/${data.userData._id}`}>
                             <button className=" bg-secondary p-2 text-white w-[50%] font-futura-pt-heavy text-3xl tracking-[0.15em]
                             hover:bg-myBlue ease-in-out duration-200">
@@ -130,8 +151,8 @@ export default function UserDashboard() {
                             </button>
                         </Link>
                     </div>
-                </section>
-            </div>
+                </section >
+            </div >
         </>
     )
 }
