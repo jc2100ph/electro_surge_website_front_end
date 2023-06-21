@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/jc2100ph/electro_surge_website_front_end/compare/v1.3.0...v1.4.0) (2023-06-21)
+
+
+### Bug Fixes
+
+* **UserDashboard:** change object property name ([750c2e4](https://github.com/jc2100ph/electro_surge_website_front_end/commit/750c2e49bb2362c6111c1ce439c3313664a0910a))
+
 ## [1.3.0](https://github.com/jc2100ph/electro_surge_website_front_end/compare/v1.0.0...v1.3.0) (2023-06-19)
 
 
